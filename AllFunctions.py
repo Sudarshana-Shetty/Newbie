@@ -1,7 +1,8 @@
 class SubClass:
     def __init__(self, db):
         self.db = db
-    
+
+# >>>>>> --- Accepting user name and address here --- <<<<<<
     def userInput(self):
         userInput = {}
         uname = str(input("Enter User Name: "))
@@ -9,32 +10,38 @@ class SubClass:
         userInput['Name'] = uname
         userInput['Address'] = uaddress
         return userInput
-                    
-    def findUser(self, db, uInput):
-        uCollections = db.UserCollections.find({'Name': uInput['Name']})
+
+# >>>>>> --- Checking for user if exists --- <<<<<<                    
+    def findUser(self, uInput):
+        uCollections = self.db.UserCollections.find({'Name': uInput['Name']})
         for uInput in uCollections:
             print(uInput)
             return 1 
 
-    def displayOneUser(self, db, uInput):
-        uCollections = db.UserCollections.find({'Name': uInput['Name']})
+# >>>>>> --- Display one user details --- <<<<<<
+    def displayOneUser(self, uInput):
+        uCollections = self.db.UserCollections.find({'Name': uInput['Name']})
         for uInput in uCollections:
             print(uInput)
             return uInput
 
-    def insertUser(self, db, uInput):
-        result = db.UserCollections.insert_one(uInput)
+# >>>>>> --- Insert user details to DB --- <<<<<<
+    def insertUser(self, uInput):
+        result = self.db.UserCollections.insert_one(uInput)
         if (result.acknowledged):
             print('User successfully added!!!\n \nUser Object ID is: ', str(result.inserted_id)) #Printing user object id
-
-    def displayAllUser(self, db):
-        print('--------- Users Available in UserDataDB ---------\n')
-        uCollections = db.UserCollections.find()
+                
+# >>>>>> --- Display all user details --- <<<<<<
+    def displayAllUser(self):
+        print('--------- Users Available in UserDataDB ---------')
+        uCollections = self.db.UserCollections.find()
         for allrecord in uCollections:
             print(allrecord)
+    
 
-    def updateUser(self, db, uInput):
-        db.UserCollections.update(
+# >>>>>> --- Update the user Address --- <<<<<<
+    def updateUser(self, uInput):
+        self.db.UserCollections.update(
             {
                 'Name': uInput['Name']
             },
@@ -45,12 +52,13 @@ class SubClass:
 
             }, multi = False
             )
-        uCollections = db.UserCollections.find({'Name': uInput['Name']})
+        uCollections = self.db.UserCollections.find({'Name': uInput['Name']})
         for uInput in uCollections:
             print('Record updated successfully!!', uInput)
 
-    def deleteUser(self, db, uInput):
-        db.UserCollections.delete_one({
-            'name': uInput['Name']
+# >>>>>> --- Delete User Details --- <<<<<<
+    def deleteUser(self, uInput):
+        self.db.UserCollections.delete_one({
+            'Name': uInput['Name']
         })
-        print('!!!-----Record Deleted----!!!', uInput)
+        print('!!!-----Record Deleted----!!!')
