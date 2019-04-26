@@ -62,5 +62,7 @@ try:
         print("Invalid Input!!! Please enter a number between 1 to 4")
 except ValueError:
     print("Invalid Input!!! Strings are not allowed")
+except EOFError as error:
+          Logging.log_exception(error)          
 finally:
     print('An error occured while running the program please try again!')  
