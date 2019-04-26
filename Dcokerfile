@@ -3,4 +3,4 @@
  ADD UserDataCollections.py/sud/
  RUN pip install pystrich
  RUN pip install pymongo
- CMD [ "python", "./sud/UserDataCollections_working.py" ]
+ CMD [ "python", "/sud/UserDataCollections_working.py" ]
