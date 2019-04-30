@@ -1,0 +1,29 @@
+version: '3'
+  services:
+    python:
+      image: py3
+      container_name: python3
+      command: tail -F sleep infinity
+      volumes:
+        - pyvol:/data/Programs/
+      networks:
+        - sudnet
+      ports:
+        - "8081:8081"
+    mongo:
+      image: mongo:4.0.0
+      restart: always
+      container_name: mongo4
+      volumes:
+        - mongovol:/data/db
+      networks:
+        - sudnet
+      ports:
+        - "27017:27017"
+  volumes:
+    pyvol:
+      external: true
+    mongovol:
+      external: true
+  networks:
+    sudnet:
