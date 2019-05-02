@@ -13,6 +13,7 @@ class SubClass:
 
 # >>>>>> --- Checking for user if exists --- <<<<<<                    
     def findUser(self, uInput):
+        count = self.db.UserCollections.count()
         if (count == 0):
             return 1
         else:
