@@ -1,6 +1,7 @@
+import pymongo
 from pymongo import MongoClient
 from AllFunctions import SubClass
-client = MongoClient('localhost', '27017')
+client = MongoClient('mongodb://mongo4:27017')
 db = client['UserDataDB'] # Creating new Data base 
 subobj = SubClass(db)
           
@@ -63,6 +64,6 @@ try:
 except ValueError:
     print("Invalid Input!!! Strings are not allowed")
 except EOFError:
-          print("An error occured while connecting DB")     
-finally:
-    print('An error occured while running the program please try again!')  
+    print("An error occured while connecting DB")      
+# finally:
+#     print('An error occured while running the program please try again!')  
